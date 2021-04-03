@@ -1,3 +1,4 @@
+import 'package:final_t_and_t/Screens/posts_screen.dart';
 import 'package:final_t_and_t/constatns.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,9 @@ class _CategorySliderState extends State<CategorySlider> {
           itemBuilder: (context, index) {
             final item = subjectList[index];
             return InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, PostsScreen.id);
+              },
               child: Container(
                 width: 130.0,
                 margin: (index == subjectList.length - 1)
