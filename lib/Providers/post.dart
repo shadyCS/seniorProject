@@ -14,6 +14,7 @@ class Post with ChangeNotifier {
   String email;
   String phone;
   String user;
+  String imageUrl;
 
   Post(
       {this.postID,
@@ -28,5 +29,6 @@ class Post with ChangeNotifier {
       this.phone,
       this.tags,
       this.updatedAt,
-      this.user});
+      this.user,
+      this.imageUrl});
 }

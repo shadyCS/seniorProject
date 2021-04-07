@@ -1,8 +1,10 @@
+import 'package:final_t_and_t/Providers/main_user.dart';
 import 'package:final_t_and_t/Theme/app_theme.dart';
 import 'package:final_t_and_t/Widgets/category_slider.dart';
 import 'package:final_t_and_t/Widgets/main_slider.dart';
 import 'package:final_t_and_t/Widgets/user_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeMainScreen extends StatefulWidget {
   @override
@@ -12,6 +14,7 @@ class HomeMainScreen extends StatefulWidget {
 class _HomeMainScreenState extends State<HomeMainScreen> {
   @override
   Widget build(BuildContext context) {
+    final _me = Provider.of<MainUser>(context);
     constractPage() {
       return NestedScrollView(
         headerSliverBuilder: (context, innerBoxScrolled) {
@@ -19,12 +22,6 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
             SliverAppBar(
                 expandedHeight: 200,
                 pinned: true,
-                actions: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.notifications),
-                    onPressed: () {},
-                  ),
-                ],
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
                     padding: EdgeInsets.all(20.0),
@@ -42,7 +39,6 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                         Text(
                           'Home',
                           style: TextStyle(
-                            fontFamily: 'Signika Negative',
                             fontWeight: FontWeight.w700,
                             fontSize: 25.0,
                           ),
@@ -55,8 +51,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(40.0),
                               image: DecorationImage(
-                                image: NetworkImage(
-                                    'https://i.pinimg.com/564x/8d/37/2c/8d372c1f9427feac8b5909e660a63bf6.jpg'),
+                                image: _me.profileImage.image,
                                 fit: BoxFit.cover,
                               ),
                             ),

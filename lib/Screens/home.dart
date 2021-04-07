@@ -16,23 +16,23 @@ class HomeScreen extends StatelessWidget {
         items: [
           Icon(
             Icons.home,
-            color: Colors.white,
+            color: Colors.black,
           ),
           Icon(
             Icons.search,
-            color: Colors.white,
+            color: Colors.black,
           ),
           Icon(
             Icons.add,
-            color: Colors.white,
+            color: Colors.black,
           ),
           Icon(
             Icons.settings,
-            color: Colors.white,
+            color: Colors.black,
           ),
           Icon(
             Icons.account_circle,
-            color: Colors.white,
+            color: Colors.black,
           ),
         ],
         index: screen.navIndex,

@@ -13,10 +13,13 @@ class _PostsScreenState extends State<PostsScreen> {
   @override
   Widget build(BuildContext context) {
     final posts = Provider.of<Posts>(context).posts;
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Posts'),
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'Posts',
+          style: TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(

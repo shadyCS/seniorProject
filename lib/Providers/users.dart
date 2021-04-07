@@ -6,10 +6,9 @@ class Users with ChangeNotifier {
     User(
         id: 1,
         name: 'Shady Ayman',
-        imageCode:
-            'https://i.pinimg.com/originals/b6/ac/a3/b6aca38da1d44b9c6e05a83394fe79f7.jpg',
+        imageCode: 'https://wallpaperaccess.com/full/2213427.jpg',
         headLine: 'Flutter Devloper',
-        numberOfRating: '69',
+        numberOfRating: '70',
         rating: '4.7',
         price: '150\$/h',
         email: 'Shady@gmail.com',
@@ -20,21 +19,20 @@ class Users with ChangeNotifier {
         id: 2,
         name: 'Anwar Haredy',
         imageCode:
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyarinya.ru%2Fwp-content%2Fuploads%2F2020%2F05%2F11%2FMarilyn-Sugar-wVLH4TTn6JOaHsS.jpg&f=1&nofb=1',
-        headLine: 'Porn Devloper',
+            'https://1.bp.blogspot.com/-NiNaLUVIuaE/XdP7uYpCD_I/AAAAAAAAbu8/j1n9UFpof_QqchUqFqJO2ZNcu6wRToLpwCLcBGAsYHQ/s1600/24%2BHearts%2BDP%2BProfile%2BPictures%2Bcollection%2B2019%2B-facebookdp%2B%252817%2529.jpg',
+        headLine: 'Javascript Devloper',
         numberOfRating: '96',
         rating: '5.0',
         price: '100\$/h',
-        email: 'Porner@gmail.com',
+        email: 'Anwar@gmail.com',
         joinedDate: '2020/9/10',
         phoneNumber: '0561234567',
         isRated: false),
     User(
         id: 3,
         name: 'Omar Zain',
-        imageCode:
-            'https://d16kd6gzalkogb.cloudfront.net/marketplace_artwork_images/6192737719_1554480283.jpg',
-        headLine: 'POV Porn Devloper',
+        imageCode: 'https://miro.medium.com/max/785/0*Ggt-XwliwAO6QURi.jpg',
+        headLine: 'Unity Devloper',
         numberOfRating: '69',
         rating: '3.6',
         price: '69\$/h',
@@ -46,7 +44,7 @@ class Users with ChangeNotifier {
         id: 4,
         name: 'Ali Haij',
         imageCode:
-            'https://i.pinimg.com/originals/ea/94/3c/ea943c3df0494c6974bb79a4c157ac2a.jpg',
+            'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         headLine: 'Java Devloper',
         numberOfRating: '96',
         rating: '5.0',

@@ -1,10 +1,15 @@
 import 'package:final_t_and_t/Screens/main_home.dart';
+import 'package:final_t_and_t/Screens/new_post_screen.dart';
+import 'package:final_t_and_t/Screens/search_screen.dart';
 import 'package:flutter/material.dart';
+
+const String apiUrl =
+    'https://senior-project-backend-connect.herokuapp.com/api';
 
 List<Widget> pages = [
   HomeMainScreen(),
-  Container(),
-  Container(),
+  SearchScreen(),
+  NewPostScreen(),
   Container(),
   Container(),
   Container(),
@@ -87,3 +92,42 @@ final subjectList = [
     'image': 'https://g-teacher.com/wp-content/uploads/2019/08/17239_s.jpg'
   },
 ];
+
+List<DropdownMenuItem> defaultRegions = [
+  "Makkah",
+  "Jeddah",
+  "Riyadh",
+  "Eastern Province",
+  "Yunbu",
+  "Al-Medina",
+  "Hafar Al-Batin",
+  "Al-Ta'if",
+  "Tabuk",
+  "Al-Qassim",
+  "Abha",
+  "Aseer",
+  "Al-Baha",
+  "Jizan",
+  "Najran",
+  "Al-Jouf",
+  "Arar",
+].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList();
+
+List<DropdownMenuItem> defaultSubjects = [
+  "Computer Science",
+  "IT",
+  "Mathematics",
+  "Business",
+  "Engineering",
+  "Accounting",
+  "Finance",
+  "Economics",
+  "Geology",
+  "Psychology",
+  "English",
+  "History",
+  "Philsophy",
+  "Physics",
+  "Chemistry",
+  "Biology",
+].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList();
