@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
         height: 50,
         animationDuration: Duration(milliseconds: 200),
         color: kPrimaryColor,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).canvasColor,
         onTap: (index) {
           screen.changeIndex(index);
         },

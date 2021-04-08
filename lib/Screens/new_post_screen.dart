@@ -1,4 +1,5 @@
 import 'package:final_t_and_t/Theme/app_theme.dart';
+import 'package:final_t_and_t/Widgets/button_widget.dart';
 import 'package:final_t_and_t/Widgets/input_widget.dart';
 import 'package:final_t_and_t/Widgets/tag_widget.dart';
 import 'package:flutter/material.dart';
@@ -126,28 +127,13 @@ class _NewPostScreenState extends State<NewPostScreen> {
                   Text("Include Email")
                 ],
               ),
-              // RoundedButton(
-              //   onPressed: () async {
-              //     var response = await post(
-              //       Uri.parse(apiUrl + '/posts'),
-              //       headers: {"Authorization": "BEARER $token"},
-              //       body: jsonEncode({
-              //         "title": title.text.trim(),
-              //         "body": description.text.trim(),
-              //         "price": price.text.trim(),
-              //         "region": regionValue.trim(),
-              //         "email": includeEmail,
-              //         "phone": includePhone,
-              //         "subject": subject.trim(),
-              //         "tags": selectedTags
-              //       }),
-              //     );
-              //   },
-              //   title: 'Submit',
-              //   color: kPrimaryButtonColor,
-              //   textColor: Colors.white,
-              //   width: MediaQuery.of(context).size.width * 0.8,
-              // )
+              ButtonWidget(
+                text: 'Submit',
+                onTap: () {},
+              ),
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),

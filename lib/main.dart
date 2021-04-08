@@ -7,8 +7,10 @@ import 'package:final_t_and_t/Screens/home.dart';
 import 'package:final_t_and_t/Screens/login_screen.dart';
 import 'package:final_t_and_t/Screens/post_screen.dart';
 import 'package:final_t_and_t/Screens/posts_screen.dart';
+import 'package:final_t_and_t/Screens/public_profile.dart';
 import 'package:final_t_and_t/Screens/signup_screen.dart';
 import 'package:final_t_and_t/Screens/user_profile.dart';
+import 'package:final_t_and_t/Settings/account_setting.dart';
 import 'package:final_t_and_t/Theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme:
             ThemeData(primaryColor: kPrimaryColor, accentColor: kPrimaryColor),
-        initialRoute: LoginScreen.id,
+        initialRoute: HomeScreen.id,
         routes: {
           HomeScreen.id: (context) => HomeScreen(),
           UserProfile.id: (context) => UserProfile(),
@@ -40,7 +42,9 @@ class MyApp extends StatelessWidget {
           PostScreen.id: (context) => PostScreen(),
           SignUpScreen.id: (context) => SignUpScreen(),
           LoginScreen.id: (context) => LoginScreen(),
-          ForgotPassword.id: (context) => ForgotPassword()
+          ForgotPassword.id: (context) => ForgotPassword(),
+          AccountSetting.id: (context) => AccountSetting(),
+          PublicProfileScreen.id: (context) => PublicProfileScreen()
         },
       ),
     );

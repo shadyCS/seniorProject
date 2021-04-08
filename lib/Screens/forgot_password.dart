@@ -1,5 +1,6 @@
 import 'package:final_t_and_t/Screens/home.dart';
 import 'package:final_t_and_t/Theme/app_theme.dart';
+import 'package:final_t_and_t/Widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -15,37 +16,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
-            SliverAppBar(
-              expandedHeight: 180,
-              pinned: true,
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              flexibleSpace: FlexibleSpaceBar(
-                background: Container(
-                  padding: EdgeInsets.all(20.0),
-                  alignment: Alignment.bottomLeft,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: appBarBackground,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Text(
-                    'Forgot Password',
-                    style: TextStyle(
-                      fontFamily: 'Signika Negative',
-                      fontWeight: FontWeight.w700,
-                      fontSize: 25.0,
-                    ),
-                  ),
-                ),
-              ),
-              automaticallyImplyLeading: false,
-            ),
+            AppBarWidget(
+              title: 'Forgot Password',
+            )
           ];
         },
         body: ListView(

@@ -1,6 +1,8 @@
 import 'package:final_t_and_t/Screens/main_home.dart';
 import 'package:final_t_and_t/Screens/new_post_screen.dart';
+import 'package:final_t_and_t/Screens/public_profile.dart';
 import 'package:final_t_and_t/Screens/search_screen.dart';
+import 'package:final_t_and_t/Settings/account_setting.dart';
 import 'package:flutter/material.dart';
 
 const String apiUrl =
@@ -10,8 +12,8 @@ List<Widget> pages = [
   HomeMainScreen(),
   SearchScreen(),
   NewPostScreen(),
-  Container(),
-  Container(),
+  AccountSetting(),
+  PublicProfileScreen(),
   Container(),
 ];
 
