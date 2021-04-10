@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:final_t_and_t/Providers/main_user.dart';
 import 'package:final_t_and_t/Data/validators.dart';
 import 'package:final_t_and_t/Screens/forgot_password.dart';
@@ -52,9 +53,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text(
                     'Sign in',
                     style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 25.0,
-                    ),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 25.0,
+                        color: Colors.white),
                   ),
                 ),
               ),
@@ -70,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
               margin: EdgeInsets.only(right: 30.0, left: 30.0),
               child: Column(
                 children: <Widget>[
+                  Image.asset('Assets/Images/login.png'),
                   TextFormField(
                     controller: email,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -109,12 +111,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           type: ProgressDialogType.Normal);
                       loading.show();
                       Provider.of<MainUser>(context, listen: false)
-                          .loginUser(email.text.trim(), password.text)
+                          .loginUser('dj.shadow2017@outlook.com', 'Sh1651632')
                           .then((value) {
-                        if (value == true) {
+                        if (value == 'Success') {
                           loading.hide();
                           Navigator.pushReplacementNamed(
                               context, HomeScreen.id);
+                        } else {
+                          loading.hide();
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.ERROR,
+                            animType: AnimType.BOTTOMSLIDE,
+                            title: 'Error',
+                            desc: value,
+                            btnOkColor: Colors.red,
+                            btnOkOnPress: () {},
+                          )..show();
                         }
                       });
                     },

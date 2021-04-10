@@ -43,7 +43,7 @@ class PostItem extends StatelessWidget {
               height: 100.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(item.imageUrl),
+                  image: item.imageUrl.image,
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(20.0),

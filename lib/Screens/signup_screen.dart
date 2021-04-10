@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:final_t_and_t/Providers/main_user.dart';
 import 'package:final_t_and_t/Data/validators.dart';
 import 'package:final_t_and_t/Screens/home.dart';
@@ -73,9 +71,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Text(
                     'Sign up',
                     style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 25.0,
-                    ),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 25.0,
+                        color: Colors.white),
                   ),
                 ),
               ),
@@ -149,7 +147,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                         hintText: 'Password',
                         hintStyle: TextStyle(
-                          fontFamily: 'Signika Negative',
                           color: Colors.grey[500],
                         ),
                         suffixIcon: IconButton(
@@ -169,7 +166,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                         hintText: 'Confirm password',
                         hintStyle: TextStyle(
-                          fontFamily: 'Signika Negative',
                           color: Colors.grey[500],
                         ),
                         suffixIcon: IconButton(
@@ -200,7 +196,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   .loginUser(emailController.text.trim(),
                                       passwordController.text)
                                   .then((value) {
-                                if (value == true) {
+                                if (value == 'Success') {
                                   loading.hide();
                                   Navigator.pushReplacementNamed(
                                       context, HomeScreen.id);

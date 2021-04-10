@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 class User with ChangeNotifier {
-  int id;
-  String imageCode;
+  String id;
+  Image avatar;
   String name;
   String headLine;
   String rating;
@@ -12,11 +12,12 @@ class User with ChangeNotifier {
   String phoneNumber;
   String joinedDate;
   bool isRated;
+  String twitter;
 
   User(
       {this.id,
       this.headLine,
-      this.imageCode,
+      this.avatar,
       this.name,
       this.numberOfRating,
       this.rating,
@@ -24,5 +25,6 @@ class User with ChangeNotifier {
       this.email,
       this.joinedDate,
       this.phoneNumber,
-      this.isRated});
+      this.isRated,
+      this.twitter});
 }

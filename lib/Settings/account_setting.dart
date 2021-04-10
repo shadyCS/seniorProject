@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:final_t_and_t/Providers/main_user.dart';
 import 'package:final_t_and_t/Theme/app_theme.dart';
 import 'package:final_t_and_t/Widgets/app_bar_widget.dart';
 import 'package:final_t_and_t/Widgets/custom_dialog.dart';
 import 'package:final_t_and_t/Widgets/edit_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+
+File image;
+Image dImage;
 
 class AccountSetting extends StatefulWidget {
   static const String id = 'AccountSetting';
@@ -20,10 +26,11 @@ class _AccountSettingState extends State<AccountSetting> {
   TextEditingController headline = TextEditingController();
   TextEditingController twitter = TextEditingController();
   TextEditingController password = TextEditingController();
-
+  var mainUser;
   @override
   Widget build(BuildContext context) {
     final mainUser = Provider.of<MainUser>(context);
+
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: NestedScrollView(
@@ -41,16 +48,21 @@ class _AccountSettingState extends State<AccountSetting> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  height: 100.0,
-                  width: 100.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50.0),
-                    image: DecorationImage(
-                      image: mainUser.profileImage == null
-                          ? appBarBackground
-                          : mainUser.profileImage.image,
-                      fit: BoxFit.cover,
+                InkWell(
+                  onTap: () {
+                    showPicker(context, mainUser);
+                  },
+                  child: Container(
+                    height: 100.0,
+                    width: 100.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50.0),
+                      image: DecorationImage(
+                        image: mainUser.profileImage == null
+                            ? appBarBackground
+                            : mainUser.profileImage.image,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -244,11 +256,62 @@ class _AccountSettingState extends State<AccountSetting> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 35,
+                )
               ],
             )
           ],
         ),
       ),
     );
+  }
+
+  imgFromCamera(MainUser mainUser) async {
+    ImagePicker picker = ImagePicker();
+    PickedFile pickedImage = await picker.getImage(source: ImageSource.camera);
+    setState(() {
+      image = File(pickedImage.path);
+      mainUser.upload(image);
+    });
+  }
+
+  imgFromGallery(MainUser mainUser) async {
+    ImagePicker picker = ImagePicker();
+    PickedFile pickedImage = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      image = File(pickedImage.path);
+      mainUser.upload(image);
+    });
+  }
+
+  void showPicker(context, MainUser mainUser) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Photo Library'),
+                      onTap: () {
+                        imgFromGallery(mainUser);
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      imgFromCamera(mainUser);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

@@ -1,5 +1,9 @@
+import 'package:final_t_and_t/Providers/main_user.dart';
 import 'package:final_t_and_t/Providers/user.dart';
+import 'package:final_t_and_t/Widgets/info_text.dart';
 import 'package:flutter/material.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class UserProfile extends StatefulWidget {
@@ -11,7 +15,6 @@ class UserProfile extends StatefulWidget {
 class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     final user = ModalRoute.of(context).settings.arguments as User;
     return Scaffold(
       appBar: AppBar(
@@ -44,7 +47,7 @@ class _UserProfileState extends State<UserProfile> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50.0),
                     image: DecorationImage(
-                        image: NetworkImage(user.imageCode), fit: BoxFit.cover),
+                        image: user.avatar.image, fit: BoxFit.cover),
                   ),
                 ),
                 SizedBox(height: 15.0),
@@ -65,32 +68,39 @@ class _UserProfileState extends State<UserProfile> {
                 SizedBox(height: 15.0),
                 InfoText(
                   label: 'Headline',
-                  info: user.headLine,
+                  info:
+                      user.headLine == 'null' ? 'Connect user' : user.headLine,
                 ),
                 Divider(),
                 SizedBox(height: 15.0),
                 InfoText(
                   label: 'Price',
-                  info: user.price,
+                  info: user.price == 'null' ? 'N/A' : user.price,
                 ),
                 Divider(),
                 SizedBox(height: 15.0),
                 InfoText(
                   label: 'Rating',
-                  info: user.rating,
+                  info: user.rating == 'null' ? 'N/A' : user.rating,
                   triling: Icon(Icons.star, size: 18.0),
                 ),
                 Divider(),
                 SizedBox(height: 15.0),
                 InfoText(
                   label: 'Phone',
-                  info: user.phoneNumber,
+                  info: user.phoneNumber == 'null' ? 'N/A' : user.phoneNumber,
                 ),
                 Divider(),
                 SizedBox(height: 15.0),
                 InfoText(
                   label: 'Email',
                   info: user.email,
+                ),
+                Divider(),
+                SizedBox(height: 15.0),
+                InfoText(
+                  label: 'Twitter',
+                  info: user.twitter == 'null' ? '' : user.twitter,
                 ),
                 Divider(),
                 SizedBox(height: 15.0),
@@ -105,7 +115,39 @@ class _UserProfileState extends State<UserProfile> {
                         ),
                       )
                     : SmoothStarRating(
-                        onRated: (value) {},
+                        onRated: (double value) {
+                          Provider.of<MainUser>(context, listen: false)
+                              .rateUser(user, value.toInt())
+                              .then((value) {
+                            if (value) {
+                              setState(() {
+                                user.isRated = true;
+                              });
+                              showDialog(
+                                  context: context,
+                                  builder: (_) => AssetGiffyDialog(
+                                        image: Image.asset(
+                                            'Assets/Images/tenor.gif'),
+                                        title: Text(
+                                          'Rating Submitted',
+                                          style: TextStyle(
+                                              fontSize: 22.0,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        description: Text(
+                                          'Thank You for rating me',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        entryAnimation: EntryAnimation.RIGHT,
+                                        onlyOkButton: true,
+                                        onOkButtonPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ));
+                            }
+                          });
+                        },
                         size: 50,
                         allowHalfRating: false,
                         starCount: 5,
@@ -118,52 +160,6 @@ class _UserProfileState extends State<UserProfile> {
           )
         ],
       ),
-    );
-  }
-}
-
-class InfoText extends StatelessWidget {
-  const InfoText({
-    this.info,
-    this.label,
-    @optionalTypeArgs this.triling,
-  });
-  final String label;
-  final String info;
-  final Icon triling;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Container(
-          width: 120.0,
-          padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 18.0,
-              color: Colors.black54,
-            ),
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
-          child: Text(
-            info,
-            style: TextStyle(
-              fontSize: 18.0,
-              fontFamily: 'Signika Negative',
-              color: Colors.black,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 3.0,
-        ),
-        triling ?? Container()
-      ],
     );
   }
 }

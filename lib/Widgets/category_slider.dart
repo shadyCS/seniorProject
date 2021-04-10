@@ -33,7 +33,8 @@ class _CategorySliderState extends State<CategorySlider> {
             final item = subjectList[index];
             return InkWell(
               onTap: () {
-                Navigator.pushNamed(context, PostsScreen.id);
+                Navigator.pushNamed(context, PostsScreen.id,
+                    arguments: item['subject']);
               },
               child: Container(
                 width: 130.0,
@@ -42,7 +43,7 @@ class _CategorySliderState extends State<CategorySlider> {
                     : EdgeInsets.only(left: 10.0),
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(item['image']), fit: BoxFit.cover),
+                        image: AssetImage(item['image']), fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(65)),
                 child: Container(
                   width: 130.0,

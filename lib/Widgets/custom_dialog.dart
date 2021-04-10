@@ -5,6 +5,7 @@ import 'package:final_t_and_t/Theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class CustomDialog extends StatelessWidget {
   CustomDialog(
       {this.controller,

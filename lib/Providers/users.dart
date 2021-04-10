@@ -1,61 +1,94 @@
+import 'dart:convert';
+
 import 'package:final_t_and_t/Providers/user.dart';
+import 'package:final_t_and_t/constatns.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart';
+
+import 'main_user.dart';
+
+bool isMe = false;
 
 class Users with ChangeNotifier {
-  List<User> _users = [
-    User(
-        id: 1,
-        name: 'Shady Ayman',
-        imageCode: 'https://wallpaperaccess.com/full/2213427.jpg',
-        headLine: 'Flutter Devloper',
-        numberOfRating: '70',
-        rating: '4.7',
-        price: '150\$/h',
-        email: 'Shady@gmail.com',
-        joinedDate: '2021/12/20',
-        phoneNumber: '0565624322',
-        isRated: true),
-    User(
-        id: 2,
-        name: 'Anwar Haredy',
-        imageCode:
-            'https://1.bp.blogspot.com/-NiNaLUVIuaE/XdP7uYpCD_I/AAAAAAAAbu8/j1n9UFpof_QqchUqFqJO2ZNcu6wRToLpwCLcBGAsYHQ/s1600/24%2BHearts%2BDP%2BProfile%2BPictures%2Bcollection%2B2019%2B-facebookdp%2B%252817%2529.jpg',
-        headLine: 'Javascript Devloper',
-        numberOfRating: '96',
-        rating: '5.0',
-        price: '100\$/h',
-        email: 'Anwar@gmail.com',
-        joinedDate: '2020/9/10',
-        phoneNumber: '0561234567',
-        isRated: false),
-    User(
-        id: 3,
-        name: 'Omar Zain',
-        imageCode: 'https://miro.medium.com/max/785/0*Ggt-XwliwAO6QURi.jpg',
-        headLine: 'Unity Devloper',
-        numberOfRating: '69',
-        rating: '3.6',
-        price: '69\$/h',
-        email: 'Omar@gmail.com',
-        joinedDate: '2019/9/3',
-        phoneNumber: '0565624222',
-        isRated: false),
-    User(
-        id: 4,
-        name: 'Ali Haij',
-        imageCode:
-            'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-        headLine: 'Java Devloper',
-        numberOfRating: '96',
-        rating: '5.0',
-        price: '30\$/h',
-        email: 'ali@gmail.com',
-        joinedDate: '2017/4/3',
-        phoneNumber: '0512345678',
-        isRated: false),
-  ];
+  List<User> _users = [];
+  List<User> _topUsers = [];
+
+  Future<void> fetchTopRated() async {
+    var response = await get(Uri.parse(apiUrl + '/users/featured'));
+    var data = jsonDecode(response.body);
+    List<User> topLoaded = [];
+    for (var user in data['user']) {
+      topLoaded.add(User(
+          id: user['id'].toString(),
+          name: user['firstName'] + ' ' + user['lastName'],
+          price: user['price'],
+          avatar: Image.memory(base64Decode(user['avatar'])),
+          headLine: user['headline'].toString(),
+          rating: double.parse(user['rating']).toStringAsFixed(1)));
+    }
+    _topUsers = topLoaded;
+    notifyListeners();
+  }
 
   List<User> get users {
     return [..._users];
+  }
+
+  List<User> get topUsers {
+    return [..._topUsers];
+  }
+
+  Future<User> getUserDetailes(MainUser mainUser, String userID) async {
+    bool isRated;
+    var response = await get(Uri.parse(apiUrl + '/users/$userID/rating'),
+        headers: {'Authorization': 'BEARER ${mainUser.token}'});
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      isRated = data['isRated'];
+    }
+    User user;
+    response = await get(Uri.parse(apiUrl + '/users/$userID'));
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      user = User(
+        id: data['user']['id'].toString(),
+        email: data['user']['email'].toString(),
+        name: data['user']['firstName'].toString() +
+            ' ' +
+            data['user']['lastName'].toString(),
+        phoneNumber: data['user']['phoneNumber'].toString(),
+        headLine: data['user']['headline'].toString(),
+        twitter: data['user']['twitter'].toString(),
+        avatar: Image.memory(base64Decode(data['user']['avatar'])),
+        price: data['user']['price'].toString(),
+        rating: data['user']['rating'].toStringAsFixed(1),
+        joinedDate: data['user']['joinDate'].toString().split('T')[0],
+        isRated: isRated,
+      );
+    }
+    return Future.value(user);
+  }
+
+  static Future<User> getUserById(String userId) async {
+    User user;
+    var response = await get(Uri.parse(apiUrl + '/users/$userId'));
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      user = User(
+        id: data['user']['id'].toString(),
+        email: data['user']['email'].toString(),
+        name: data['user']['firstName'].toString() +
+            ' ' +
+            data['user']['lastName'].toString(),
+        phoneNumber: data['user']['phoneNumber'].toString(),
+        headLine: data['user']['headline'].toString(),
+        twitter: data['user']['twitter'].toString(),
+        avatar: Image.memory(base64Decode(data['user']['avatar'])),
+        price: data['user']['price'].toString(),
+        rating: data['user']['rating'].toStringAsFixed(1),
+        joinedDate: data['user']['joinDate'].toString().split('T')[0],
+      );
+      return Future.value(user);
+    }
   }
 }

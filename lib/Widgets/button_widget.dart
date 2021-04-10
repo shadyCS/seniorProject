@@ -18,15 +18,15 @@ class ButtonWidget extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
-          color: textColor,
+          color: kPrimaryColor,
         ),
         child: Text(
           text,
           style: TextStyle(
-            fontFamily: 'Signika Negative',
-            fontSize: 18.0,
-            fontWeight: FontWeight.w700,
-          ),
+              fontFamily: 'Signika Negative',
+              fontSize: 18.0,
+              fontWeight: FontWeight.w700,
+              color: Colors.white),
         ),
       ),
     );

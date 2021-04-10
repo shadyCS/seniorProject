@@ -1,4 +1,5 @@
 import 'package:final_t_and_t/Providers/main_user.dart';
+import 'package:final_t_and_t/Widgets/info_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +12,6 @@ class PublicProfileScreen extends StatefulWidget {
 class _PublicProfileScreenState extends State<PublicProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     final user = Provider.of<MainUser>(context);
     return Scaffold(
       appBar: AppBar(
@@ -24,9 +24,11 @@ class _PublicProfileScreenState extends State<PublicProfileScreen> {
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
-          color: Colors.black,
+          color: Colors.white,
           onPressed: () {
-            Navigator.pop(context);
+            if (Navigator.canPop(context)) {
+              Navigator.canPop(context);
+            }
           },
         ),
       ),
@@ -57,30 +59,38 @@ class _PublicProfileScreenState extends State<PublicProfileScreen> {
                   ),
                 ),
                 SizedBox(height: 15.0),
-                InfoText(label: 'Joined at', info: 'Not Yet' //user.joinedDate,
+                InfoText(
+                    label: 'Joined at', info: user.joinDate //user.joinedDate,
                     ),
                 Divider(),
                 SizedBox(height: 15.0),
                 InfoText(
                   label: 'Headline',
-                  info: user.headline ?? 'Not added yet',
+                  info:
+                      user.headline == 'null' ? 'Connect user' : user.headline,
                 ),
                 Divider(),
                 SizedBox(height: 15.0),
-                InfoText(label: 'Price', info: 'Not yet' //user.price,
+                InfoText(
+                    label: 'Price',
+                    info: user.price == 'null'
+                        ? 'No price yet'
+                        : user.price //user.price,
                     ),
                 Divider(),
                 SizedBox(height: 15.0),
                 InfoText(
                   label: 'Rating',
-                  info: 'Not Yet', //user.rating,
+                  info: user.rating == 'null'
+                      ? 'Not rated yet'
+                      : user.rating, //user.rating,
                   triling: Icon(Icons.star, size: 18.0),
                 ),
                 Divider(),
                 SizedBox(height: 15.0),
                 InfoText(
                   label: 'Phone',
-                  info: user.phone,
+                  info: user.phone == 'null' ? 'N/A' : user.phone,
                 ),
                 Divider(),
                 SizedBox(height: 15.0),
@@ -93,54 +103,6 @@ class _PublicProfileScreenState extends State<PublicProfileScreen> {
           )
         ],
       ),
-    );
-  }
-}
-
-class InfoText extends StatelessWidget {
-  const InfoText({
-    this.info,
-    this.label,
-    @optionalTypeArgs this.triling,
-  });
-  final String label;
-  final String info;
-  final Icon triling;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Flexible(
-          child: Container(
-            width: 120.0,
-            padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.black54,
-              ),
-            ),
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
-          child: Text(
-            info,
-            style: TextStyle(
-              fontSize: 18.0,
-              fontFamily: 'Signika Negative',
-              color: Colors.black,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 3.0,
-        ),
-        triling ?? Container()
-      ],
     );
   }
 }

@@ -26,7 +26,7 @@ class _PostScreenState extends State<PostScreen> {
               leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -45,7 +45,7 @@ class _PostScreenState extends State<PostScreen> {
                         alignment: Alignment.bottomCenter,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(postInfo.imageUrl),
+                            image: postInfo.imageUrl.image,
                             fit: BoxFit.cover,
                           ),
                           borderRadius: BorderRadius.only(

@@ -1,4 +1,5 @@
 import 'package:final_t_and_t/Providers/main_user.dart';
+import 'package:final_t_and_t/Screens/public_profile.dart';
 import 'package:final_t_and_t/Theme/app_theme.dart';
 import 'package:final_t_and_t/Widgets/category_slider.dart';
 import 'package:final_t_and_t/Widgets/main_slider.dart';
@@ -14,7 +15,6 @@ class HomeMainScreen extends StatefulWidget {
 class _HomeMainScreenState extends State<HomeMainScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -45,12 +45,15 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                         Text(
                           'Home',
                           style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 25.0,
-                          ),
+                              fontWeight: FontWeight.w700,
+                              fontSize: 25.0,
+                              color: Colors.white),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, PublicProfileScreen.id);
+                          },
                           child: Container(
                             height: 80.0,
                             width: 80.0,

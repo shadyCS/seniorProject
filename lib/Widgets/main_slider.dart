@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:final_t_and_t/Screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainSlider extends StatefulWidget {
@@ -31,7 +32,8 @@ class _MainSliderState extends State<MainSlider> {
             items: [
               InkWell(
                 onTap: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => ProductListView()));
+                  Navigator.pushNamed(context, PostsScreen.id,
+                      arguments: 'all');
                 },
                 child: Container(
                   width: width,
@@ -39,8 +41,7 @@ class _MainSliderState extends State<MainSlider> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.0),
                     image: DecorationImage(
-                      image: NetworkImage(
-                          "https://optinmonster.com/wp-content/uploads/2015/04/typesofblogposts.png"),
+                      image: AssetImage('Assets/Images/posts.png'),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -81,8 +82,7 @@ class _MainSliderState extends State<MainSlider> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.0),
                     image: DecorationImage(
-                      image: NetworkImage(
-                          "http://www.bu.edu/files/2017/09/resize-18-1651-TEXTBOOK-037.jpg"),
+                      image: AssetImage('Assets/Images/books.jpg'),
                       fit: BoxFit.cover,
                     ),
                   ),

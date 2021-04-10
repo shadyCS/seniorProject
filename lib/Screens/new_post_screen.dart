@@ -1,8 +1,12 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:final_t_and_t/Providers/main_user.dart';
+import 'package:final_t_and_t/Providers/post.dart';
 import 'package:final_t_and_t/Theme/app_theme.dart';
 import 'package:final_t_and_t/Widgets/button_widget.dart';
 import 'package:final_t_and_t/Widgets/input_widget.dart';
 import 'package:final_t_and_t/Widgets/tag_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../constatns.dart';
 
@@ -21,15 +25,16 @@ class _NewPostScreenState extends State<NewPostScreen> {
   TextEditingController title = TextEditingController();
   TextEditingController description = TextEditingController();
   TextEditingController price = TextEditingController();
-  TextEditingController region = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final mainUser = Provider.of<MainUser>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('New Post'),
         centerTitle: true,
         backgroundColor: kPrimaryColor,
+        actions: [],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -129,7 +134,38 @@ class _NewPostScreenState extends State<NewPostScreen> {
               ),
               ButtonWidget(
                 text: 'Submit',
-                onTap: () {},
+                onTap: () {
+                  Post post = Post(
+                      title: title.text,
+                      body: description.text,
+                      price: price.text,
+                      region: regionValue,
+                      subject: subject,
+                      hasEmail: includeEmail,
+                      hasPhone: includePhone,
+                      tags: selectedTags);
+                  mainUser.createPost(post).then((value) {
+                    if (value != 'Success') {
+                      AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.ERROR,
+                        title: 'Error',
+                        desc: value,
+                        btnOkColor: Colors.red,
+                        btnOkOnPress: () {},
+                      )..show();
+                    } else {
+                      AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.SUCCES,
+                        title: 'Success',
+                        desc: value,
+                        btnOkColor: Colors.green,
+                        btnOkOnPress: () {},
+                      )..show();
+                    }
+                  });
+                },
               ),
               SizedBox(
                 height: 20,

@@ -1,3 +1,4 @@
+import 'package:final_t_and_t/Providers/user.dart';
 import 'package:flutter/cupertino.dart';
 
 class Post with ChangeNotifier {
@@ -11,10 +12,13 @@ class Post with ChangeNotifier {
   String createdAt;
   String updatedAt;
   List<String> tags = [];
+  bool hasEmail;
+  bool hasPhone;
   String email;
   String phone;
   String user;
-  String imageUrl;
+  Image imageUrl;
+  User creator;
 
   Post(
       {this.postID,
@@ -30,5 +34,8 @@ class Post with ChangeNotifier {
       this.tags,
       this.updatedAt,
       this.user,
-      this.imageUrl});
+      this.imageUrl,
+      this.creator,
+      this.hasEmail = false,
+      this.hasPhone = false});
 }

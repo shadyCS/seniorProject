@@ -1,10 +1,13 @@
 import 'package:final_t_and_t/Providers/main_user.dart';
+import 'package:final_t_and_t/Providers/post.dart';
 import 'package:final_t_and_t/Providers/posts.dart';
 import 'package:final_t_and_t/Providers/screen_changer.dart';
 import 'package:final_t_and_t/Providers/users.dart';
 import 'package:final_t_and_t/Screens/forgot_password.dart';
 import 'package:final_t_and_t/Screens/home.dart';
 import 'package:final_t_and_t/Screens/login_screen.dart';
+import 'package:final_t_and_t/Screens/new_post_screen.dart';
+import 'package:final_t_and_t/Screens/new_textbook.dart';
 import 'package:final_t_and_t/Screens/post_screen.dart';
 import 'package:final_t_and_t/Screens/posts_screen.dart';
 import 'package:final_t_and_t/Screens/public_profile.dart';
@@ -28,13 +31,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: ScreenChanger()),
         ChangeNotifierProvider.value(value: Users()),
         ChangeNotifierProvider.value(value: Posts()),
-        ChangeNotifierProvider.value(value: MainUser())
+        ChangeNotifierProvider.value(value: MainUser()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme:
-            ThemeData(primaryColor: kPrimaryColor, accentColor: kPrimaryColor),
-        initialRoute: HomeScreen.id,
+        theme: ThemeData(
+            primaryColor: kPrimaryColor,
+            accentColor: kPrimaryColor,
+            backgroundColor: Colors.white,
+            canvasColor: Colors.white),
+        initialRoute: LoginScreen.id,
         routes: {
           HomeScreen.id: (context) => HomeScreen(),
           UserProfile.id: (context) => UserProfile(),
@@ -44,7 +50,9 @@ class MyApp extends StatelessWidget {
           LoginScreen.id: (context) => LoginScreen(),
           ForgotPassword.id: (context) => ForgotPassword(),
           AccountSetting.id: (context) => AccountSetting(),
-          PublicProfileScreen.id: (context) => PublicProfileScreen()
+          PublicProfileScreen.id: (context) => PublicProfileScreen(),
+          NewPostScreen.id: (context) => NewPostScreen(),
+          NewTextbookScreen.id: (context) => NewTextbookScreen()
         },
       ),
     );
